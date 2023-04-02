@@ -64,6 +64,7 @@ html {
   .login {
     position: relative;
     width: 40%;
+    height: 30rem;
     padding: 10px;
     margin: 0 0 10px 0;
     box-sizing: border-box;
@@ -80,6 +81,7 @@ html {
     position: relative;
     width: 100%;
     padding: 10px;
+    margin-bottom: 2rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     background: #009688;
     font-family: 'Roboto', sans-serif;
@@ -150,7 +152,7 @@ html {
     box-sizing: border-box;
     background: transparent;
     font-size: 1rem;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-weight: 500;
     opacity: 1;
     animation: input_opacity 0.8s cubic-bezier(.55, 0, .1, 1);
@@ -182,7 +184,7 @@ html {
     font-family: 'Roboto', sans-serif;
     font-size: 0.9rem;
     font-weight: 500;
-    color: #E37F00;
+    color: #009688;
     cursor: pointer;
     opacity: 1;
     animation: input_opacity 0.8s cubic-bezier(.55, 0, .1, 1);

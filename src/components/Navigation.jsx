@@ -7,7 +7,7 @@ export default function Navigation()
     <>
         <nav className="navbar bg-body-tertiary" id="navigation">
             <div className="container-fluid">
-                <a className="navbar-brand mx-5" href=' ' id="navigation-title"> Graduate Directory Resume</a>
+                <a className="navbar-brand mx-5" href='/' id="navigation-title"> Graduate Directory Resume</a>
                 <Link to="/Login" ><button className="btn btn-outline" id='l-btn'>Login</button></Link>
             </div>
         </nav>                
