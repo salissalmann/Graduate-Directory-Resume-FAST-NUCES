@@ -1,20 +1,15 @@
-const { MongoClient } = require('mongodb');
+const mongoose = require('mongoose');
 
-async function connection() 
-{
-  const uri = 'mongodb+srv://salissalman:Salis2002@resume.tnk3pk7.mongodb.net/?retryWrites=true&w=majority'; // Replace with your MongoDB URI
-  const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+const DBstring = "mongodb://127.0.0.1:27017/Graduate"
+mongoose.set('strictQuery',true)
 
-  try 
-  {
-        await client.connect();
-        console.log('Connected to Database');
-        return client.db(); 
-  } catch (err) 
-  {
-        console.error('Failed to connect to MongoDB:', err);
-        process.exit(1);
+const ConnectToMongo = async () => {
+  try {
+    await mongoose.connect(DBstring);
+    console.log("Connected to database successfully!");
+  } catch (error) {
+    console.error("Error connecting to database: ", error);
   }
-}
+};
 
-module.exports = connection;
+module.exports = ConnectToMongo;
