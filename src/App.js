@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from './components/Login.jsx';
 import './App.css';
 import Homepage from './components/Homepage.jsx';
+//import Personalinfo from "/personal_info.js";
 
 function App() 
 {
@@ -11,6 +12,8 @@ function App()
            <Routes>          
              <Route path="/" element={<Homepage/>} />
              <Route path="/Login" element={<Login/>} />
+
+            { /*<Route path="/Form" element={<Personalinfo/>} />*/}
            </Routes>
        </BrowserRouter>
      </div>

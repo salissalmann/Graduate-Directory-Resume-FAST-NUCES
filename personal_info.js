@@ -1,6 +1,8 @@
 import React from "react";
 import '../assets/form.css';
-class Personalinfo extends React.Component{
+
+class Personalinfo extends React.Component
+{
     ch(event){
         document.getElementById("theimg").src=URL.createObjectURL(event.target.files[0]);
     }
