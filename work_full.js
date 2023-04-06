@@ -26,11 +26,7 @@ class Fullwork extends React.Component {
 <Workexp />
 <h2>Work Experience 5</h2>
 <Workexp />
-<h2>Work Experience 6</h2>
-<Workexp />
-<h2>Work Experience 7</h2>
-<Workexp />
-  
+
 <div class="the_buttons">
     <input type="submit" value="Save"></input>
     <input type="submit" value="Next"></input>
