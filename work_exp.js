@@ -4,8 +4,60 @@ import '../assets/edu.js';
 
 class Workexp extends React.Component {
    
+    constructor(props) {
+        super(props);
+        this.state = {
+            position: "",
+            company: "",
+            roleDesc: "",
+            startDate: "",
+            endDate: "",
+            startMonth: "",
+            endMonth: ""
+
+        };
+        // Bind the functions to the component instance
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+
+        // Update the state object with the new values
+        this.setState({
+            [name]: value
+        });
+    }
+
+    handleStartDateChange = (event) => {
+        this.setState({ startDate: event.target.value });
+      }
+    
+      handleEndDateChange = (event) => {
+        this.setState({ endDate: event.target.value });
+      }
+      handleStartMonthChange = (event) => {
+        this.setState({ startDate: event.target.value });
+      }
+    
+      handleEndMonthChange = (event) => {
+        this.setState({ endDate: event.target.value });
+      }
+    
+
+    handleSubmit(event) {
+        // Prevent the form from being submitted normally
+        event.preventDefault();
+
+        // Log the form data to the console
+        console.log(this.state);
+    }
 
     render() {
+        
         return (
             <>
              
@@ -24,11 +76,13 @@ class Workexp extends React.Component {
         
         <div class="form-group">
             <label for="name"> Position</label>
-            <input type="text" id="name" name="name" required></input>
+            <input type="text" id="position1" name="name" value={this.state.position}
+            onChange={this.handleInputChange} required></input>
           </div>
           <div class="form-group">
             <label for="name"> Company</label>
-            <input type="text" id="name" name="name" required></input>
+            <input type="text" id="Companyname" name="name" value={this.state.position}
+            onChange={this.handleInputChange} required></input>
           </div>
     
     <div class="the_firstline">
@@ -38,7 +92,8 @@ class Workexp extends React.Component {
             
             <div class="form-group role">
                 <label for="name"> Role Description</label>
-                <input type="text" id="name" name="name" required></input>
+                <input type="text" id="role_desc" name="name" value={this.state.roleDesc}
+            onChange={this.handleInputChange} required></input>
               </div>
         
           </div>
@@ -50,7 +105,7 @@ class Workexp extends React.Component {
                 <div class="basic_info">
                     
                 <div class="custom-select" >
-                    <select>
+                    <select value={this.state.startDate} onChange={this.handleStartDateChange}>
                       <option value="0">Start Date</option>
                       <option value="1">1</option>
                       <option value="3">2</option>
@@ -94,7 +149,7 @@ class Workexp extends React.Component {
         
               <div class="basic_info">
                 <div class="custom-select" >
-                    <select>
+                    <select value={this.state.startMonth} onChange={this.handleStartMonthChange}>
                       <option value="0">Start Month</option>
                       <option value="1">January</option>
                       <option value="2">Feburary</option>
@@ -126,7 +181,7 @@ class Workexp extends React.Component {
                     <div class="basic_info">
                         
                     <div class="custom-select" >
-                        <select>
+                        <select value={this.state.endDate} onChange={this.handleEndDateChange}>
                           <option value="0">End Date</option>
                           <option value="1">1</option>
                           <option value="3">2</option>
@@ -170,7 +225,7 @@ class Workexp extends React.Component {
             
                   <div class="basic_info">
                     <div class="custom-select" >
-                        <select>
+                        <select value={this.state.endMonth} onChange={this.handleEndMonthChange}>
                           <option value="0">End Month</option>
                           <option value="1">January</option>
                           <option value="2">Feburary</option>
