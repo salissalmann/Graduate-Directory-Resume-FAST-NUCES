@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken");
-const SECRET_KEY = "secretkeyresumes";
-
+const SECRET_KEY = "secretkeyresumes"
 
 const FetchUser = (Req,Res,Next)=>
 {
@@ -10,8 +9,7 @@ const FetchUser = (Req,Res,Next)=>
         if(!Token)
         {
             Res.status(401).send( {error:"Please authenticate using a valid Token"})
-        }
-        
+        }        
         const DATA = jwt.verify(Token,SECRET_KEY);
         Req.user = DATA.user;    
         Next()

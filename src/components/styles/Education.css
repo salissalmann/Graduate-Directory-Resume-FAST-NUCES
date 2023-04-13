@@ -1,0 +1,36 @@
+#text-area-e
+{
+    font-family: 'Nunito', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    width: 25%;
+    height: 100%;
+    padding: 1rem;
+    border: 1px solid #58aeff;
+    border-radius: 0.5rem;
+    background-color: white;
+}
+.education-item
+{
+    font-family: 'Nunito', sans-serif;
+    margin-top: 10rem;
+    font-size: 0.2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    text-align: left;
+    align-content: center;
+    align-items: center;
+    border: 1px solid #58aeff;
+    border-radius: 0.5rem;
+    background-color: white;
+    width: 100%;
+}
+.sign
+{
+    margin-bottom: 1rem;
+    color: rgb(59, 59, 59);
+}

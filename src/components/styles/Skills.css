@@ -1,0 +1,30 @@
+#Skill-Box
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 1px solid #58aeff;
+    border-radius: 0.5rem;
+    background-color: white;
+    color: #000;
+    margin-top: 5rem;
+}
+#skill
+{
+    display: flex;
+    flex-direction: column;
+    text-transform: capitalize;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+    align-items: center;
+    padding: 0.2rem;
+    border-radius: 0.5rem;
+    margin-right: 1rem;
+}
+

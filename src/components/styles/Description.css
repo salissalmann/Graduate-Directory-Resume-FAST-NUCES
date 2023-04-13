@@ -1,0 +1,35 @@
+.home-page-text-desc
+{
+    font-family: 'Nunito', sans-serif;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #323235;
+    
+}
+#text-area
+{
+    font-family: 'Nunito', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    border: 1px solid #58aeff;
+    border-radius: 0.5rem;
+    background-color: white;
+}
+#p-desc-box
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+}

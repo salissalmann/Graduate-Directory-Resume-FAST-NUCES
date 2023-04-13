@@ -28,6 +28,10 @@ const StudentSchema = new Schema(
                 type: String,
                 required: true,
             },
+            skills: {
+                type: Array,
+                default: []
+            },
             timestamp: 
             {
                 type: Date,

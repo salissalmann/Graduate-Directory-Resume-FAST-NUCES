@@ -1,0 +1,37 @@
+#input-fy
+{
+    width: 77.5%;
+    height: 50px;
+    padding: 0 16px;
+    margin-right: 1rem;
+    background: transparent;
+    border-radius: 4px;
+    border: 1px solid #58aeff;
+    color: gray;
+    animation: shake_541 0.14s 3;
+}
+  
+#input-fy:valid 
+{
+border-color: #45feaf;
+animation: none;
+}
+
+#input-fy-2
+{
+    width: 38.2%;
+    height: 50px;
+    padding: 0 16px;
+    margin-right: 1rem;
+    background: transparent;
+    border-radius: 4px;
+    border: 1px solid #58aeff;
+    color: gray;
+    animation: shake_541 0.14s 3;
+}
+  
+#input-fy-2:valid 
+{
+border-color: #45feaf;
+animation: none;
+}

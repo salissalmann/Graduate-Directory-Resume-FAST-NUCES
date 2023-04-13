@@ -19,13 +19,7 @@ body
     margin: 0;
     padding: 0;
 }
-#l-btn
-{
-    border: 2px solid #58aeff;
-    text-decoration: none;
-
-}
-button 
+#l-btn 
 {
     font-family: inherit;
     display: inline-block;
@@ -42,7 +36,7 @@ button
     border-radius: 6px;
     font-weight: 500;
 }
-button:before 
+#l-btn:before 
 {
     content: "";
     position: absolute;
@@ -53,25 +47,25 @@ button:before
     width: 200px;
     border-radius: 50%;
 }
-button:hover 
+#l-btn:hover 
 {
     color: #fff;
 }
    
-button:before 
+#l-btn:before 
 {
     top: 100%;
     left: 100%;
     transition: all .7s;
 }
    
-button:hover:before 
+#l-btn:hover:before 
 {
     top: -30px;
     left: -30px;
 }
    
-button:active:before 
+#l-btn:active:before 
 {
     background: #3a0ca3;
     transition: background 0s;
@@ -93,6 +87,9 @@ button:active:before
 .home-page-text h3
 {
     font-size: 1.5rem;
-    color: gray;
-    
+    color: gray;    
+}
+
+.login-box
+{
 }
