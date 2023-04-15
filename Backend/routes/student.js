@@ -2,7 +2,7 @@ const express = require('express');
 const Router = express.Router();
 const jwt = require('jsonwebtoken');
 const SECRET_KEY = "secretkeyresumes";
-const bcrypt = require('bcrypt');
+//const bcrypt = require('bcrypt');
 const FetchUser = require('./middleware');
 const Student = require('../models/student');
 var bodyParser = require('body-parser')
@@ -44,14 +44,14 @@ Router.post('/CreateAIStudent', jsonParser, async (Req, Res) => {
           department: 'BSAI',
         };
 
-        const Salt = await bcrypt.genSalt(10);
-        const HashedPassword = await bcrypt.hash(Password , Salt);
+        ////const Salt = await bcrypt.genSalt(10);
+        //const HashedPassword = await bcrypt.hash(Password , Salt);
 
         const CreateStudent = await Student.create({
           name: Students.name,
           rollNumber: Students.rollNumber,
           email: Students.email,
-          password: HashedPassword,
+          password: Password,
           department: Students.department,
         });
 
@@ -118,8 +118,8 @@ Router.post('/login', jsonParser, async (Req, Res) => {
           return Res.status(400).json({ Success: false, Error: "Enter Correct Email/Password" });
       }
 
-      const ComparePassword = await bcrypt.compare(Req.body.password , UserFound.password);
-      if (!ComparePassword)
+      //const ComparePassword = await bcrypt.compare(Req.body.password , UserFound.password);
+      if (Req.body.password!==UserFound.password)
       {
           return Res.status(400).json({ Success: false , Error: "Enter Correct Email/Password"});     
       }
@@ -159,14 +159,14 @@ Router.post('/CreateCSStudent', jsonParser, async (Req, Res) => {
         department: 'BSCS',
       };
 
-      const Salt = await bcrypt.genSalt(10);
-      const HashedPassword = await bcrypt.hash(Password , Salt);
+      ////const Salt = await bcrypt.genSalt(10);
+      //const HashedPassword = await bcrypt.hash(Password , Salt);
 
       const CreateStudent = await Student.create({
         name: Students.name,
         rollNumber: Students.rollNumber,
         email: Students.email,
-        password: HashedPassword,
+        password: Password,
         department: Students.department,
       });
 
@@ -233,14 +233,14 @@ Router.post('/CreateCYStudent', jsonParser, async (Req, Res) => {
         department: 'BSCY',
       };
 
-      const Salt = await bcrypt.genSalt(10);
-      const HashedPassword = await bcrypt.hash(Password , Salt);
+      //const Salt = await bcrypt.genSalt(10);
+      //const HashedPassword = await bcrypt.hash(Password , Salt);
 
       const CreateStudent = await Student.create({
         name: Students.name,
         rollNumber: Students.rollNumber,
         email: Students.email,
-        password: HashedPassword,
+        password: Password,
         department: Students.department,
       });
 
@@ -306,14 +306,14 @@ Router.post('/CreateDSStudent', jsonParser, async (Req, Res) => {
         department: 'BSDS',
       };
 
-      const Salt = await bcrypt.genSalt(10);
-      const HashedPassword = await bcrypt.hash(Password , Salt);
+      //const Salt = await bcrypt.genSalt(10);
+      //const HashedPassword = await bcrypt.hash(Password , Salt);
 
       const CreateStudent = await Student.create({
         name: Students.name,
         rollNumber: Students.rollNumber,
         email: Students.email,
-        password: HashedPassword,
+        password: Password,
         department: Students.department,
       });
 
@@ -379,14 +379,14 @@ Router.post('/CreateFSMStudent', jsonParser, async (Req, Res) => {
         department: 'FSM',
       };
 
-      const Salt = await bcrypt.genSalt(10);
-      const HashedPassword = await bcrypt.hash(Password , Salt);
+      //const Salt = await bcrypt.genSalt(10);
+      //const HashedPassword = await bcrypt.hash(Password , Salt);
 
       const CreateStudent = await Student.create({
         name: Students.name,
         rollNumber: Students.rollNumber,
         email: Students.email,
-        password: HashedPassword,
+        password: Password,
         department: Students.department,
       });
 
@@ -451,14 +451,14 @@ Router.post('/CreateEEStudent', jsonParser, async (Req, Res) => {
         department: 'BSEE',
       };
 
-      const Salt = await bcrypt.genSalt(10);
-      const HashedPassword = await bcrypt.hash(Password , Salt);
+      //const Salt = await bcrypt.genSalt(10);
+      //const HashedPassword = await bcrypt.hash(Password , Salt);
 
       const CreateStudent = await Student.create({
         name: Students.name,
         rollNumber: Students.rollNumber,
         email: Students.email,
-        password: HashedPassword,
+        password: Password,
         department: Students.department,
       });
 
@@ -523,14 +523,14 @@ Router.post('/CreateMSStudent', jsonParser, async (Req, Res) => {
         department: element['Program'],
       };
 
-      const Salt = await bcrypt.genSalt(10);
-      const HashedPassword = await bcrypt.hash(Password , Salt);
+      //const Salt = await bcrypt.genSalt(10);
+      //const HashedPassword = await bcrypt.hash(Password , Salt);
 
       const CreateStudent = await Student.create({
         name: Students.name,
         rollNumber: Students.rollNumber,
         email: Students.email,
-        password: HashedPassword,
+        password: Password,
         department: Students.department,
       });
 
