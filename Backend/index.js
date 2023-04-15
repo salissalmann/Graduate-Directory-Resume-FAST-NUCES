@@ -1,5 +1,3 @@
-const connection = require('./connection');
-
 const express = require('express');
 const app = express();
 const cors = require('cors')
@@ -9,6 +7,23 @@ const FetchUser = require("./routes/middleware");
 const User = require('./models/studentDetails');
 const PersonalInfo = require("./models/studentDetails");
 const fs = require('fs');
+const dotenv = require('dotenv');
+const mongoose = require('mongoose');
+
+dotenv.config();
+const DBstring = process.env.MONGODB_URL;
+
+mongoose.set('strictQuery',true)
+
+const ConnectToMongo = async () => {
+  try {
+    await mongoose.connect(DBstring);
+    console.log("Connected to database successfully!");
+  } catch (error) {
+    console.error("Error connecting to database: ", error);
+  }
+};
+ConnectToMongo();
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
@@ -26,7 +41,6 @@ const upload = multer({ storage });
 
 app.use(express.json())
 
-connection();
 
 app.use(cors());
 app.use('/student' , require('./routes/student'))
@@ -85,5 +99,5 @@ app.get('/CheckPersonalInfo', FetchUser , async (req, res) =>
     }
 });
 
-
-app.listen( 3001 , ()=> {console.log("LISTENING AT PORT: 3001")} )
+const PORT = process.env.PORT || 3001;
+app.listen( PORT , ()=> {console.log("LISTENING AT PORT: 3001")} )
