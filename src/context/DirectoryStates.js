@@ -10,7 +10,7 @@ const DirectoryStates = (props)=>
 
     const CheckFYPStatus = async ()=>
     {
-        const response = await fetch(`http://localhost:3001/fyp/GetFYPStatus`, {
+        const response = await fetch(`http://${process.env.REACT_APP_IPADDRESS}/fyp/GetFYPStatus`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -32,7 +32,7 @@ const DirectoryStates = (props)=>
 
     const AddDescription = async (description)=>
     {
-        const response = await fetch(`http://localhost:3001/description/AddDescription`, {
+        const response = await fetch(`http://${process.env.REACT_APP_IPADDRESS}/description/AddDescription`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -55,7 +55,7 @@ const DirectoryStates = (props)=>
 
     const AddProject = async (title, link, description)=>
     {
-        const response = await fetch(`http://localhost:3001/projects/AddProject`, {
+        const response = await fetch(`http://${process.env.REACT_APP_IPADDRESS}/projects/AddProject`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -82,7 +82,7 @@ const DirectoryStates = (props)=>
         {
             endYear = "Present";
         }
-        const response = await fetch(`http://localhost:3001/education/AddEducation`, {
+        const response = await fetch(`http://${process.env.REACT_APP_IPADDRESS}/education/AddEducation`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -109,7 +109,7 @@ const DirectoryStates = (props)=>
         {
             endYear = "Present";
         }
-        const response = await fetch(`http://localhost:3001/workexperience/AddWorkExperience`, {
+        const response = await fetch(`http://${process.env.REACT_APP_IPADDRESS}/workexperience/AddWorkExperience`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -135,7 +135,7 @@ const DirectoryStates = (props)=>
         member1Email = member1Email.toLowerCase();
         member2Email = member2Email.toLowerCase();
         member3Email = member3Email.toLowerCase();
-        const response = await fetch(`http://localhost:3001/fyp/AddFYP`, {
+        const response = await fetch(`http://${process.env.REACT_APP_IPADDRESS}/fyp/AddFYP`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -160,7 +160,7 @@ const DirectoryStates = (props)=>
 
     const CheckPersonalInfo = async ()=>
     {
-        const response = await fetch(`http://localhost:3001/CheckPersonalInfo`, {
+        const response = await fetch(`http://${process.env.REACT_APP_IPADDRESS}/CheckPersonalInfo`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -189,7 +189,7 @@ const DirectoryStates = (props)=>
     const [SkillsStatus , SetSkillsStatus] = useState(false);
     const CheckSkills = async ()=>
     {
-        const response = await fetch(`http://localhost:3001/handledata/CheckSkills`, {
+        const response = await fetch(`http://${process.env.REACT_APP_IPADDRESS}/handledata/CheckSkills`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -210,7 +210,7 @@ const DirectoryStates = (props)=>
     const [EducationStatus , SetEducationStatus] = useState(false);
     const CheckEducation = async ()=>
     {
-        const response = await fetch(`http://localhost:3001/education/GetEducationStatus`, {
+        const response = await fetch(`http://${process.env.REACT_APP_IPADDRESS}/education/GetEducationStatus`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -231,7 +231,7 @@ const DirectoryStates = (props)=>
     const [WorkExperienceStatus , SetWorkExperienceStatus] = useState(false);
     const CheckWorkExperience = async ()=>
     {
-        const response = await fetch(`http://localhost:3001/workexperience/GetWorkExperienceStatus`, {
+        const response = await fetch(`http://${process.env.REACT_APP_IPADDRESS}/workexperience/GetWorkExperienceStatus`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -253,7 +253,7 @@ const DirectoryStates = (props)=>
     const CheckProjects = async ()=>
     {
 
-        const response = await fetch(`http://localhost:3001/projects/GetProjectStatus`, {
+        const response = await fetch(`http://${process.env.REACT_APP_IPADDRESS}/projects/GetProjectStatus`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -275,7 +275,7 @@ const DirectoryStates = (props)=>
 
     const CheckDescription = async ()=>
     {
-        const response =  await fetch(`http://localhost:3001/description/GetDescriptionStatus`, {
+        const response =  await fetch(`http://${process.env.REACT_APP_IPADDRESS}/description/GetDescriptionStatus`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

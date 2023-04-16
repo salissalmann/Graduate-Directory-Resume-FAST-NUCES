@@ -53,7 +53,7 @@ export default function PersonalInfo()
     formData.append('testImage', file);
     formData.append("GPA", GPA);
     try {
-        const Response = await fetch(`http://localhost:3001/addDetails`, {
+        const Response = await fetch(`http://${process.env.REACT_APP_IPADDRESS}/addDetails`, {
             method: 'POST',
             headers: {
                 'Authorization-Token': localStorage.getItem("Token"),
