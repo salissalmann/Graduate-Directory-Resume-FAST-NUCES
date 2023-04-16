@@ -20,7 +20,7 @@ export default function Skills()
     {
         const Run = async () =>
         {
-            const Response = await fetch( `http://localhost:3001/handledata/GetSkills`,
+            const Response = await fetch( `http://${process.env.REACT_APP_IPADDRESS}/handledata/GetSkills`,
             {
                 method: "GET",
                 headers:
@@ -58,7 +58,7 @@ export default function Skills()
   
       if (newSkill.trim() !== '') 
       {
-        const Response = await fetch( `http://localhost:3001/handledata/AddSkills/${newSkill.toUpperCase()}`,
+        const Response = await fetch( `http://${process.env.REACT_APP_IPADDRESS}/handledata/AddSkills/${newSkill.toUpperCase()}`,
         {
           method: "PUT",
           headers:
@@ -76,7 +76,7 @@ export default function Skills()
     };
   
     const handleDeleteSkill = async (index,skill) => {
-      const Response = await fetch( `http://localhost:3001/handledata/DeleteSkills/${skill.toUpperCase()}`,
+      const Response = await fetch( `http://${process.env.REACT_APP_IPADDRESS}/handledata/DeleteSkills/${skill.toUpperCase()}`,
       {
         method: "PUT",
         headers:
