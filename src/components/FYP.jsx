@@ -78,7 +78,7 @@ export default function FYP()
         formData.append("testImage", file);
 
         try {
-            const Response = await fetch(`http://localhost:3001/AddFYP`, {
+            const Response = await fetch(`http://${process.env.REACT_APP_IPADDRESS}/AddFYP`, {
                 method: 'POST',
                 headers: {
                     'Authorization-Token': localStorage.getItem("Token"),

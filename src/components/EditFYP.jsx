@@ -86,7 +86,7 @@ export default function PersonalInfo()
           formData.append("testImage", file);
         }
         try {
-            const Response = await fetch(`http://localhost:3001/UpdateFYP`, {
+            const Response = await fetch(`http://${process.env.REACT_APP_IPADDRESS}/UpdateFYP`, {
                 method: 'PUT',
                 headers: {
                     'Authorization-Token': localStorage.getItem("Token"),

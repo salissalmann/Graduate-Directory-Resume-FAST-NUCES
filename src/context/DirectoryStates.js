@@ -10,7 +10,7 @@ const DirectoryStates = (props)=>
 
     const CheckFYPStatus = async ()=>
     {
-        const response = await fetch(`http://localhost:3001/fyp/GetFYPStatus`, {
+        const response = await fetch(`http://${process.env.REACT_APP_IPADDRESS}/fyp/GetFYPStatus`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

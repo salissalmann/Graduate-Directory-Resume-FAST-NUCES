@@ -79,9 +79,8 @@ export default function Resume()
     
 
     let ProfilePicture = "";       
-    if (Effect === true && Context.PersonalDetails !== undefined )
+    if (Effect === true && Context.PersonalDetails)
     {
-
         const base64String = Buffer.from( Context.PersonalDetails.img.data , 'base64')
         ProfilePicture = URL.createObjectURL(
             new Blob([base64String.buffer], { type: 'image/*' } )
@@ -100,6 +99,8 @@ export default function Resume()
         (
         <>
             <div className="container my-3" ref={resumeWrapperRef} id="ResumeWrapper">
+            {Context.PersonalDetails &&
+            (
                 <div className="resume-header">
                     <div className='resume-header-pt-1'>
                         <img id="profile" src={ProfilePicture} width={180} height={180} alt="Profile"/></div>
@@ -117,13 +118,18 @@ export default function Resume()
                         </div>
                     </div>
                 </div>
+            )}
+
+            {Context.Description &&
+            (
                 <div className="resume-body">
                     <div className="resume-body-pt-1">
                         <h3>Profile:</h3>
                         {Context.Description && <h6>{Context.Description}</h6>}
                     </div>
                 </div>
-
+            )}
+            
                 <div className="resume-body">
                     <div className="resume-body-pt-2">
                         <h3>Skills:</h3>

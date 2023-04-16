@@ -31,7 +31,7 @@ const Education = () => {
   useEffect(() => {
     const Run = async () => 
       {
-        const Response = await fetch(`http://localhost:3001/education/GetEducation`, {
+        const Response = await fetch(`http://${process.env.REACT_APP_IPADDRESS}/education/GetEducation`, {
           method: "GET",
           headers: {
             'Content-Type': 'application/json',

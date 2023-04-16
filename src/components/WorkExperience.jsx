@@ -25,7 +25,7 @@ const WorkExperience = () => {
   useEffect(() => {
     const Run = async () =>
     {
-      const Response = await fetch(`http://localhost:3001/workExperience/GetWorkExperience`, {
+      const Response = await fetch(`http://${process.env.REACT_APP_IPADDRESS}/workExperience/GetWorkExperience`, {
         method: "GET",
         headers: {
           'Content-Type': 'application/json',

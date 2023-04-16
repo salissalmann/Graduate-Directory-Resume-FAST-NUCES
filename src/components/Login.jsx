@@ -25,7 +25,8 @@ export default function Login() {
   const Submit = async (e) => 
   {
     e.preventDefault();
-    const Response = await fetch(`http://localhost:3001/student/login`, {
+    console.log(`http://${process.env.REACT_APP_IPADDRESS}`)
+    const Response = await fetch(`http://${process.env.REACT_APP_IPADDRESS}/student/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),

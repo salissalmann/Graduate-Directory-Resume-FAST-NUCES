@@ -19,7 +19,7 @@ const Projects = () => {
   useEffect(() => {
     const Run = async () =>
     {
-      const Response = await fetch(`http://localhost:3001/projects/GetProjects`, {
+      const Response = await fetch(`http://${process.env.REACT_APP_IPADDRESS}/projects/GetProjects`, {
         method: "GET",
         headers: {
           'Content-Type': 'application/json',

@@ -103,7 +103,7 @@ export default function PersonalInfo()
     }
 
     try {
-        const Response = await fetch(`http://localhost:3001/UpdatePersonalInfo`, {
+        const Response = await fetch(`http://${process.env.REACT_APP_IPADDRESS}/UpdatePersonalInfo`, {
             method: 'POST',
             headers: {
                 'Authorization-Token': localStorage.getItem("Token"),
