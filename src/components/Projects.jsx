@@ -7,14 +7,34 @@ import 'react-toastify/dist/ReactToastify.css';
 import DirectoryContext from '../context/DirectoryContext';
 import {useContext} from 'react';
 import {useNavigate} from 'react-router-dom';
+import { useEffect } from 'react';
 
 const MAX_PROJECTS = 4;
-const MAX_DESCRIPTION_LENGTH = 150;
+const MAX_DESCRIPTION_LENGTH = 300;
 
 const Projects = () => {
   const Context = useContext(DirectoryContext)
 
   const [projects, setProjects] = useState([]);
+  useEffect(() => {
+    const Run = async () =>
+    {
+      const Response = await fetch(`http://localhost:3001/projects/GetProjects`, {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization-Token': localStorage.getItem('Token')
+        }
+      });
+      const ResponseToJson = await Response.json();
+      if (ResponseToJson.Success === true) {
+        setProjects(ResponseToJson.project)
+      }
+    }
+    Run()
+  })
+
+
 
   const [title, setTitle] = useState('');
   const [link, setLink] = useState('');
@@ -47,17 +67,10 @@ const Projects = () => {
     }
 
     if (description.length > MAX_DESCRIPTION_LENGTH) {
-      toast.error("Please provide a description length less than 150 characters.")
+      toast.error("Please provide a description length less than 300 characters.")
       return;
     }
 
-    const newProject = {
-      title: title.trim(),
-      link: link.trim(),
-      description: description.trim()
-    };
-
-    setProjects([...projects, newProject]);
     Context.AddProject(title,link,description)    
     setTitle('');
     setLink('');
@@ -71,6 +84,12 @@ const Projects = () => {
     navigate('/dashboard');
 
   }
+
+
+  const HandleCancel = () => {
+    navigate('/dashboard')
+  }
+
 
   return (
     <>
@@ -97,7 +116,7 @@ const Projects = () => {
             </div>
 
             <Button type="submit" padding= "2rem" sx={{backgroundColor:"#69D4C6", color:"white", width:"50%" ,marginLeft:"-1%"}}> Add Project</Button>
-            <ToastContainer />
+            <ToastContainer theme="colored"/>
         </form>
     </div>
 
@@ -110,13 +129,15 @@ const Projects = () => {
             <div className="container my-2">
                 {(project.link) ? (<h6>Link: {project.link}</h6>) : (<h6>Link: None</h6>)}
             </div>
+            <button className="btn btn-danger" onClick={() => Context.DeleteProject(project._id)}>Delete</button>
         </div>
         
     ))}
     </div>
 
     <form onSubmit={Submit}>
-        <Button type="submit" padding= "2rem" sx={{backgroundColor:"#69D4C6", color:"white", width:"50%" , marginTop:"1%" ,marginLeft:"-1%"}}> SAVE INFORMATION</Button>
+          <Button type="submit" padding= "2rem" sx={{backgroundColor:"#69D4C6", color:"white", width:"25%" , marginTop:"1%" ,marginLeft:"-1%"}}> SAVE INFORMATION</Button>
+          <Button type="button" padding= "2rem" sx={{backgroundColor:"#69D4C6", color:"white", width:"25%" , marginTop:"1%" ,marginLeft:"1%"}} onClick={HandleCancel}> CANCEL</Button>
     </form>
     </>
     

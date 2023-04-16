@@ -50,6 +50,33 @@ Router.get('/GetEducationStatus', FetchUser , async (req, res) => {
     }
 });
 
+Router.get('/GetEducation', FetchUser , async (req, res) => {
+    try
+    {
+        const Success=true
+        const education = await Education.find({ user: req.user.id });
+        return res.status(200).json({ Success, education });
+    }
+    catch (error)
+    {
+        return res.status(400).json({ Error: "An Error Occured"});   
+    }
+});
+
+Router.delete('/DeleteEducation/:id', FetchUser , async (req, res) => {
+    try
+    {
+        const Success=true
+        const education = await Education.findByIdAndDelete(req.params.id);
+        return res.status(200).json({ Success, education });
+    }
+    catch (error)
+    {
+        return res.status(400).json({ Error: "An Error Occured"});   
+    }
+});
+
+
 
 
 module.exports = Router;

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import DirectoryContext from "./DirectoryContext";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const DirectoryStates = (props)=>
@@ -130,20 +130,15 @@ const DirectoryStates = (props)=>
         }
     }
 
-    const AddFYP = async (member1Email, member2Email, member3Email, shortTitle, projectTitle, projectType, projectDescription, supervisor, coSupervisor)=>
+    const AddFYP = async (formData)=>
     {
-        member1Email = member1Email.toLowerCase();
-        member2Email = member2Email.toLowerCase();
-        member3Email = member3Email.toLowerCase();
-        const response = await fetch(`http://localhost:3001/fyp/AddFYP`, {
+        const response = await fetch(`http://localhost:3001/AddFYP`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 'Authorization-Token': localStorage.getItem("Token"),
             },
-            body: JSON.stringify({
-                member1Email, member2Email, member3Email, shortTitle, projectTitle, projectType, projectDescription, supervisor, coSupervisor
-            })
+            body: formData
         });
         const json = await response.json();
         if(json.Success)
@@ -293,9 +288,199 @@ const DirectoryStates = (props)=>
         }
     }
 
+    const EditDescription = async (description)=>
+    {
+        const response = await fetch(`http://localhost:3001/description/UpdateDescription`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization-Token': localStorage.getItem("Token"),                
+            },
+            body: JSON.stringify({
+                description
+            })
+        });
+        const json = await response.json();
+        if(json.Success)
+        {
+            toast.success("Description Added Successfully");
+        }
+    }
+
+    const [Description , SetDescription] = useState("");
+    const GetDescription = async ()=>
+    {
+        const response = await fetch(`http://localhost:3001/description/GetDescription`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization-Token': localStorage.getItem("Token"),
+            }
+        });
+        const json = await response.json();
+        if(json.Success)
+        {
+            SetDescription(json.descriptionText);
+        }
+    }
+
+    const DeleteEducation = async (id)=>
+    {
+        const response = await fetch(`http://localhost:3001/education/DeleteEducation/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization-Token': localStorage.getItem("Token"),
+            }
+        });
+        const json = await response.json();
+        if(json.Success)
+        {
+            toast.success("Education Deleted Successfully");
+        }
+    }
+
+    const DeleteWorkExperience = async (id)=>
+    {
+        const response = await fetch(`http://localhost:3001/workexperience/DeleteWorkExperience/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization-Token': localStorage.getItem("Token"),
+            }
+        });
+        const json = await response.json();
+        if(json.Success)
+        {
+            toast.success("Work Experience Deleted Successfully");
+        }
+    }
+
+    const DeleteProject = async (id)=>
+    {
+        const response = await fetch(`http://localhost:3001/projects/DeleteProject/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization-Token': localStorage.getItem("Token"),
+            }
+        });
+        const json = await response.json();
+        if(json.Success)
+        {
+            toast.success("Project Deleted Successfully");
+        }
+    }
+
+
+    
+    const [PersonalDetails , SetPersonalDetails] = useState()
+    const UserDetails = async ()=>
+    {
+        const response = await fetch(`http://localhost:3001/GetPersonalInfo`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization-Token': localStorage.getItem("Token"),
+            }
+        });
+        const json = await response.json();
+        if(json.Success)
+        {
+            SetPersonalDetails(json.PersonalDetails);
+        }
+    }
+    
+    const [Skills , SetSkills] = useState([]);
+    const GetSkills = async ()=>
+    {
+        const Response = await fetch( `http://localhost:3001/handledata/GetSkills`,
+        {
+            method: "GET",
+            headers:
+            { 'Content-Type' : 'application/json',
+                'Authorization-Token' : localStorage.getItem('Token')
+            }
+        });
+        const ResponseToJson = await Response.json();
+        if(ResponseToJson.Success===true)
+        {
+            SetSkills(ResponseToJson.Skills)
+        }
+    }
+
+    const [Education , SetEducation] = useState([]);
+    const GetEducation = async ()=>
+    {
+        const Response = await fetch( `http://localhost:3001/education/GetEducation`,
+        {
+            method: "GET",
+            headers:
+            { 'Content-Type' : 'application/json',
+                'Authorization-Token' : localStorage.getItem('Token')
+            }
+        });
+        const ResponseToJson = await Response.json();
+        if(ResponseToJson.Success===true)
+        {
+            SetEducation(ResponseToJson.education)
+        }
+    }
+
+    const [WorkExperience, SetWorkExperience] = useState([]);
+    const GetWorkExperience = async ()=>
+    {
+        const Response = await fetch(`http://localhost:3001/workExperience/GetWorkExperience`, {
+            method: "GET",
+            headers: {
+            'Content-Type': 'application/json',
+            'Authorization-Token': localStorage.getItem('Token')
+            }
+        });
+        const ResponseToJson = await Response.json();
+        if (ResponseToJson.Success === true) {
+            SetWorkExperience(ResponseToJson.workExperience)
+        }
+    }
+
+    const [Projects , SetProjects] = useState([]);
+    const GetProjects = async ()=>
+    {
+        const Response = await fetch( `http://localhost:3001/projects/GetProjects`,
+        {
+            method: "GET",
+            headers:
+            { 'Content-Type' : 'application/json',
+                'Authorization-Token' : localStorage.getItem('Token')
+            }
+        });
+        const ResponseToJson = await Response.json();
+        if(ResponseToJson.Success===true)
+        {
+            SetProjects(ResponseToJson.project)
+        }
+    }
+
+    const [FYP , SetFYP] = useState([]);
+    const GetFYP = async ()=>
+    {
+        const Response = await fetch( `http://localhost:3001/fyp/GetFYP`,
+        {
+            method: "GET",
+            headers:
+            { 'Content-Type' : 'application/json',
+                'Authorization-Token' : localStorage.getItem('Token')
+            }
+        });
+        const ResponseToJson = await Response.json();
+        if(ResponseToJson.Success===true)
+        {
+            SetFYP(ResponseToJson.fyp)
+        }
+    }
 
     return (
-        <DirectoryContext.Provider value={{ AuthToken , DescriptionStatus , CheckDescription, SetAuthToken , AddProject , AddEducation , AddWorkExperience , AddFYP , CheckFYP , CheckFYPStatus , PersonalInfo , CheckPersonalInfo , SkillsStatus , CheckSkills , EducationStatus , CheckEducation , CheckWorkExperience , WorkExperienceStatus , ProjectsStatus , CheckProjects , AddDescription }}>
+        <DirectoryContext.Provider value={{ FYP,GetFYP,Projects,GetProjects, GetWorkExperience,WorkExperience,Education,GetEducation,GetSkills, Skills ,PersonalDetails , UserDetails ,AuthToken , DeleteEducation, DeleteWorkExperience , DeleteProject ,GetDescription , Description , DescriptionStatus , CheckDescription, EditDescription , SetAuthToken , AddProject , AddEducation , AddWorkExperience , AddFYP , CheckFYP , CheckFYPStatus , PersonalInfo , CheckPersonalInfo , SkillsStatus , CheckSkills , EducationStatus , CheckEducation , CheckWorkExperience , WorkExperienceStatus , ProjectsStatus , CheckProjects , AddDescription }}>
             {props.children}
         </DirectoryContext.Provider>
     )

@@ -6,12 +6,15 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import DirectoryContext from '../context/DirectoryContext';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const MAX_EDUCATION = 3;
 const MAX_DESCRIPTION_LENGTH = 150;
 
 const Education = () => {
   const Context = useContext(DirectoryContext)
+
+
 
   const [education, setEducation] = useState([]);
   const [institution, setInstitution] = useState('');
@@ -20,6 +23,36 @@ const Education = () => {
   const [endYear, setEndYear] = useState('');
   const [description, setDescription] = useState('');
 
+
+  const handleDelete = (id) => {
+    Context.DeleteEducation(id);
+  }
+
+  useEffect(() => {
+    const Run = async () => 
+      {
+        const Response = await fetch(`http://localhost:3001/education/GetEducation`, {
+          method: "GET",
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization-Token': localStorage.getItem('Token')
+          }
+        });
+        const ResponseToJson = await Response.json();
+        if (ResponseToJson.Success === true) {
+          setEducation(ResponseToJson.education)
+        }
+      }
+      Run()
+  })
+
+  
+  const HandleCancel = () => {
+    Navigate('/dashboard')
+  }
+
+  
+  
   const handleInstitutionChange = (e) => {
     setInstitution(e.target.value);
   };
@@ -67,15 +100,6 @@ const Education = () => {
       endYearValue = "Current";
     }
   
-    const newEducation = {
-      institution: institution.trim(),
-      degree: degree.trim(),
-      startYear: startYear.trim(),
-      endYear: endYearValue,
-      description: description.trim(),
-    };
-  
-    setEducation([...education, newEducation]);
     Context.AddEducation(institution, degree, startYear, endYear, description);
     setInstitution('');
     setDegree('');
@@ -140,19 +164,20 @@ const Education = () => {
             <div className="container my-2">
                 <h6>Education: {edu.institution}</h6>
                 <h6>Timeline: {edu.startYear} - {edu.endYear} </h6>
-                
             </div>
             <div className="container my-2">
                 <h6>Degree: {edu.degree}</h6>
                 <h6>Description : {edu.description}</h6>
-        </div>
+          </div>
+          <button className="btn btn-danger" onClick={() => handleDelete(edu._id)}>Delete</button>
         </div>
         
     ))}
     </div>
 
     <form onSubmit={Submit}>
-        <Button type="submit" padding= "2rem" sx={{backgroundColor:"#69D4C6", color:"white", width:"50%" , marginTop:"1%" ,marginLeft:"-1%"}}> SAVE INFORMATION</Button>
+            <Button type="submit" padding= "2rem" sx={{backgroundColor:"#69D4C6", color:"white", width:"25%" , marginTop:"1%" ,marginLeft:"-1%"}}> SAVE INFORMATION</Button>
+            <Button type="button" padding= "2rem" sx={{backgroundColor:"#69D4C6", color:"white", width:"25%" , marginTop:"1%" ,marginLeft:"1%"}} onClick={HandleCancel}> CANCEL</Button>
     </form>
 
       <ToastContainer />

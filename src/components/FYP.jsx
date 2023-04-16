@@ -2,17 +2,20 @@ import React from 'react'
 import MainNavigation from './MainNavigation'
 import "./styles/fyp.css"
 import {useState , useContext , useEffect } from 'react'
-import { Button , Select , MenuItem} from "@mui/material";
+import { Button} from "@mui/material";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import DirectoryContext from '../context/DirectoryContext'
 import { useNavigate } from "react-router-dom";
-
+import { useRef } from 'react';
 
 export default function FYP()
 {
     const Context = useContext(DirectoryContext);
     const [RunEffect , SetRunEffect] = useState(false)
+    const fileInputRef = useRef(null);
+    const [fileName, setFileName] = useState("");
+  
     useEffect(() => {
         if(RunEffect===false)
         {
@@ -31,7 +34,12 @@ export default function FYP()
     const [supervisor, setSupervisor] = useState("");
     const [coSupervisor, setCoSupervisor] = useState("");
     const [projectDescription, setProjectDescription] = useState("");
-
+    const [file, setFile] = useState("");
+    const UploadFile = ()=>
+    {
+          document.getElementById("fileID").click();
+    }
+  
     const HandleEmailMember1Value = (event) => { setEmailMember1(event.target.value); };
     const HandleEmailMember2Value = (event) => { setEmailMember2(event.target.value); };
     const HandleEmailMember3Value = (event) => { setEmailMember3(event.target.value); };
@@ -42,12 +50,53 @@ export default function FYP()
     const HandleCoSupervisorValue = (event) => { setCoSupervisor(event.target.value); };
     const HandleProjectDescriptionValue = (event) => { setProjectDescription(event.target.value); };
 
+    const handleFileChange = (event)    => { 
+        setFile(event.target.files[0])
+        const file = event.target.files[0];
+        if (file) {
+            setFile(file);
+            setFileName(file.name);
+          } else {
+            setFile(null);
+            setFileName("");
+          }
+        ;};
+    
     const Navigate = useNavigate();
     const Submit = async (e) => {
         e.preventDefault();
-        Context.AddFYP(emailMember1, emailMember2, emailMember3, shortTitle , projectTitle , projectType , projectDescription, supervisor, coSupervisor)
-        toast.success("FYP Added Successfully");
-        Navigate("/dashboard");
+        const formData = new FormData();
+        formData.append("member1Email", emailMember1);
+        formData.append("member2Email", emailMember2);
+        formData.append("member3Email", emailMember3);
+        formData.append("projectTitle", projectTitle);
+        formData.append("projectType", projectType);
+        formData.append("shortTitle", shortTitle);
+        formData.append("supervisor", supervisor);
+        formData.append("coSupervisor", coSupervisor);
+        formData.append("projectDescription", projectDescription);
+        formData.append("testImage", file);
+
+        try {
+            const Response = await fetch(`http://localhost:3001/AddFYP`, {
+                method: 'POST',
+                headers: {
+                    'Authorization-Token': localStorage.getItem("Token"),
+                },
+                body: formData,
+            });
+            const ResponseToJson = await Response.json();
+            if (ResponseToJson.Success===true)
+            {
+                toast.success("Details Added Successfully");
+                Navigate("/dashboard");
+            }
+    
+        } catch (error) 
+        {
+            console.error(error);
+        }
+    
     };
 
       
@@ -129,6 +178,15 @@ export default function FYP()
                 <div className="container" id="p-desc-box">
                     <textarea id="text-area-p" required placeholder="Add Description" className='form-control' rows="2" value={projectDescription} onChange={HandleProjectDescriptionValue}></textarea>
                 </div>
+
+                <div id="container">
+                    <input className="PostPicture" type="file"  onChange={handleFileChange} ref={fileInputRef} id="fileID" accept='image/psd' hidden/>            
+                    <button id="btn-upload" type="button" onClick={UploadFile}>Choose Poster Image</button>  
+                </div>
+                <div id="container">
+                    <span className="form-text">{fileName}</span>
+                </div>
+                    
                 
 
                 <Button type="submit" padding= "2rem" sx={{backgroundColor:"#69D4C6", color:"white", width:"50%" , marginTop:"1%" ,marginLeft:"-1%"}}> SAVE INFORMATION</Button>

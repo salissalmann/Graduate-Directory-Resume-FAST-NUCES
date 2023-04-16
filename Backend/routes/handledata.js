@@ -3,7 +3,8 @@ const Router = express.Router();
 
 const FetchUser = require('./middleware');
 const Student = require('../models/student');
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
+const { Rotate90DegreesCcw } = require('@mui/icons-material');
 var jsonParser = bodyParser.json()
 
 Router.put('/AddSkills/:skill', FetchUser  , jsonParser , async (req, res) => 
@@ -55,6 +56,26 @@ Router.get('/CheckSkills', FetchUser , async (req, res) => {
     {
         return res.status(400).json({ Error: "An Error Occured"});   
     }
-
 })
+
+Router.get('/GetSkills', FetchUser , async (req, res) => {
+    try
+    {
+        const RequestUser = await Student.findOne( { _id : req.user.id })
+        if(RequestUser.skills.length>0)
+        {
+            return res.json({Success:true , Skills: RequestUser.skills});
+        }
+        else
+        {
+            return res.json({Success:false});
+        }
+    }
+    catch (error)
+    {
+        return res.status(400).json({ Error: "An Error Occured"});   
+    }
+})
+
+
 module.exports = Router;

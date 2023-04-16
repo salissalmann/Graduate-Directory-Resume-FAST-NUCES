@@ -50,6 +50,11 @@ const FYPSchema = new mongoose.Schema(
     {
         type: String,
     },
+    img:
+    {
+        data: Buffer,
+        contentType: String
+    },
 });
 
 const User = mongoose.model('StudentFYP' , FYPSchema);

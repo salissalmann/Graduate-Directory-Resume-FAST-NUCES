@@ -7,6 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AiFillDelete } from "react-icons/ai";
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export default function Skills()
 {
@@ -14,6 +15,33 @@ export default function Skills()
     const Navigate = useNavigate();
     const [skills, setSkills] = useState([]);
     const [newSkill, setNewSkill] = useState('');
+
+    useEffect( () =>
+    {
+        const Run = async () =>
+        {
+            const Response = await fetch( `http://localhost:3001/handledata/GetSkills`,
+            {
+                method: "GET",
+                headers:
+                { 'Content-Type' : 'application/json',
+                  'Authorization-Token' : localStorage.getItem('Token')
+                }
+            });
+            const ResponseToJson = await Response.json();
+            if(ResponseToJson.Success===true)
+            {
+                setSkills(ResponseToJson.Skills)
+            }
+        }
+        Run()
+    })
+
+    const HandleCancel = () => {
+      Navigate('/dashboard')
+    }
+
+
 
     const Submit = async (e) => {
         e.preventDefault();
@@ -30,8 +58,6 @@ export default function Skills()
   
       if (newSkill.trim() !== '') 
       {
-        setSkills([...skills, newSkill]);
-
         const Response = await fetch( `http://localhost:3001/handledata/AddSkills/${newSkill.toUpperCase()}`,
         {
           method: "PUT",
@@ -50,7 +76,6 @@ export default function Skills()
     };
   
     const handleDeleteSkill = async (index,skill) => {
-      setSkills(skills.filter((_, i) => i !== index));
       const Response = await fetch( `http://localhost:3001/handledata/DeleteSkills/${skill.toUpperCase()}`,
       {
         method: "PUT",
@@ -96,7 +121,8 @@ export default function Skills()
             </div>
         </div>
             <form onSubmit={Submit}>
-                <Button type="submit" padding= "2rem" sx={{backgroundColor:"#69D4C6", color:"white", width:"50%" , marginTop:"1%" ,marginLeft:"-1%"}}> SAVE INFORMATION</Button>
+                <Button type="submit" padding= "2rem" sx={{backgroundColor:"#69D4C6", color:"white", width:"25%" , marginTop:"1%" ,marginLeft:"-1%"}}> SAVE INFORMATION</Button>
+                <Button type="button" padding= "2rem" sx={{backgroundColor:"#69D4C6", color:"white", width:"25%" , marginTop:"1%" ,marginLeft:"1%"}} onClick={HandleCancel}> CANCEL</Button>
                 <ToastContainer />
             </form>
 

@@ -51,5 +51,32 @@ Router.get('/GetWorkExperienceStatus', FetchUser , async (req, res) => {
     }
 });
 
+Router.get('/GetWorkExperience', FetchUser , async (req, res) => {
+    try
+    {
+        const Success=true
+        const workExperience = await WorkExperience.find({ user: req.user.id });
+        return res.status(200).json({ Success, workExperience });
+    }
+    catch (error)
+    {
+        return res.status(400).json({ Error: "An Error Occured"});   
+    }
+});
+
+Router.delete('/DeleteWorkExperience/:id', FetchUser , async (req, res) => {
+    try
+    {
+        const Success=true
+        const workExperience = await WorkExperience.findByIdAndDelete(req.params.id);
+        return res.status(200).json({ Success, workExperience });
+    }
+    catch (error)
+    {
+        return res.status(400).json({ Error: "An Error Occured"});   
+    }
+});
+
+
 
 module.exports = Router;

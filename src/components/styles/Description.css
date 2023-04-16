@@ -33,3 +33,23 @@
     height: 100%;
     padding: 1rem;
 }
+
+.home-page-text-desc-yours
+{
+    font-family: 'Nunito', sans-serif;
+    text-align: left;
+    justify-content: center;
+    font-size: 0.1rem;
+    font-weight: 100;
+    color: #323235;
+}
+#xyz
+{
+    text-align: left;
+}
+#your-desc-box
+{
+    border: 1px solid #58aeff;
+    padding: 1rem;
+    background-color: white;
+}

@@ -48,4 +48,45 @@ Router.get('/GetProjectStatus', FetchUser , async (req, res) => {
     }
 });
 
+Router.get('/GetProjects', FetchUser , async (req, res) => {
+    try
+    {
+        const Success=true
+        const project = await Project.find({ user: req.user.id });
+        if(project.length>0)
+        {
+            return res.status(200).json({ Success, project });
+        }
+        else
+        {
+            return res.status(200).json({ Success:false });
+        }
+    }
+    catch (error)
+    {
+        return res.status(400).json({ Error: "An Error Occured"});   
+    }
+});
+
+Router.delete('/DeleteProject/:id', FetchUser , async (req, res) => {
+    try
+    {
+        const Success=true
+        const project = await Project.findByIdAndDelete(req.params.id);
+        if(project)
+        {
+            return res.status(200).json({ Success });
+        }
+        else
+        {
+            return res.status(200).json({ Success:false });
+        }
+    }
+    catch (error)
+    {
+        return res.status(400).json({ Error: "An Error Occured"});   
+    }
+});
+
+
 module.exports = Router;

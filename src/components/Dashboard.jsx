@@ -23,6 +23,7 @@ export default function PersonalInfo()
         Context.CheckWorkExperience()
         Context.CheckProjects()
         Context.CheckDescription()
+        Context.CheckFYPStatus()
     }
     Run()
   },[])
@@ -40,18 +41,22 @@ export default function PersonalInfo()
         <div className="container my-4 d-flex justify-content-center">
             <div className='dashboard'>
                 <h5>Add Personal Information</h5>
+                <div className='dashboard-d'>
                 {
-                    (Context.PersonalInfo===false) ? ( <Link to="/PersonalInfo"><button type="button" >Add</button></Link> ) : ( <Link to="/PersonalInfo"><button type="button" disabled >Added</button></Link> )
-                }
+                    (Context.PersonalInfo===false) ? ( <Link to="/PersonalInfo"><button type="button" >Add</button></Link> ) : ( <Link to="/EditPersonalInfo"><button type="button" className="button-d" >Edit</button></Link> )
+                }                
+                </div>
             </div>   
         </div>
 
         <div className="container my-4 d-flex justify-content-center">
             <div className='dashboard'>
                 <h5>Add Your Description</h5>
+                <div className='dashboard-d'>
                 {
-                    (Context.DescriptionStatus===false) ? ( <Link to="/Description"><button type="button" >Add</button></Link> ) : ( <Link to="/Description"><button type="button" disabled >Added</button></Link>)
+                    (Context.DescriptionStatus===false) ? ( <Link to="/Description"><button type="button" >Add</button></Link> ) : ( <Link to="/EditDescription"><button type="button" className="button-d" >Edit</button></Link> )
                 }
+                </div>
             </div>   
         </div>
 
@@ -59,7 +64,7 @@ export default function PersonalInfo()
             <div className='dashboard'>
                 <h5>Add Your Skills</h5>
                 {
-                    (Context.SkillsStatus===false) ? ( <Link to="/Skills"><button type="button" >Add</button></Link> ) : ( <Link to="/Skills"><button type="button" disabled >Added</button></Link> )
+                    (Context.SkillsStatus===false) ? ( <Link to="/Skills"><button type="button" >Add</button></Link> ) : ( <Link to="/Skills"><button type="button" className='button-d'>Edit</button></Link> )
                 }
             </div>
         </div>
@@ -68,7 +73,7 @@ export default function PersonalInfo()
             <div className='dashboard'>
                 <h5>Add Your Education</h5>
                 {
-                    (Context.EducationStatus===false) ? ( <Link to="/Education"><button type="button" >Add</button></Link> ) : ( <Link to="/Education"><button type="button" disabled >Added</button></Link> )
+                    (Context.EducationStatus===false) ? ( <Link to="/Education"><button type="button" >Add</button></Link> ) : ( <Link to="/Education"><button type="button" className='button-d'>Edit</button></Link> )
                 }
             </div>
         </div>
@@ -77,7 +82,7 @@ export default function PersonalInfo()
             <div className='dashboard'>
                 <h5>Add Your Experience</h5>
                 {
-                    (Context.WorkExperienceStatus===false) ? ( <Link to="/WorkExperience"><button type="button" >Add</button></Link> ) : ( <Link to="/WorkExperience"><button type="button" disabled >Added</button></Link> )
+                    (Context.WorkExperienceStatus===false) ? ( <Link to="/WorkExperience"><button type="button" >Add</button></Link> ) : ( <Link to="/WorkExperience"><button type="button" className='button-d' >Edit</button></Link> )
                 }
             </div>
         </div>
@@ -86,7 +91,7 @@ export default function PersonalInfo()
             <div className='dashboard'>
                 <h5>Add Your Projects</h5>
                 {
-                    (Context.ProjectsStatus===false) ? ( <Link to="/Projects"><button type="button" >Add</button></Link> ) : ( <Link to="/Projects"><button type="button" disabled >Added</button></Link> )
+                    (Context.ProjectsStatus===false) ? ( <Link to="/Projects"><button type="button" >Add</button></Link> ) : ( <Link to="/Projects"><button type="button" className='button-d' >Edit</button></Link>  )
                 }
             </div>
         </div>
@@ -94,9 +99,26 @@ export default function PersonalInfo()
         <div className="container my-4 d-flex justify-content-center">  
             <div className='dashboard'>
                 <h5>Add Your FYP</h5>
-                <Link to="/FYP"><button type="button" >EDIT</button></Link> 
+                <div className='dashboard-d'>
+                {
+                    (Context.CheckFYP) ? ( <Link to="/FYP"><button type="button" >Add</button></Link> ) : ( 
+                    <>
+                        <Link to="/FYP"><button type="button" disabled >Added</button></Link> 
+                        <Link to="/EditFYP"><button type="button" className='button-d' >Edit</button></Link>
+                    </>
+                    )
+                }
+                </div>
             </div>
         </div>
+
+        <div className="container my-4 d-flex justify-content-center">
+            <div className='dashboard'>
+                <h5>View Resume</h5>
+                <Link to="/Resume"><button type="button" >View</button></Link>
+            </div>
+        </div>
+
     </>
     </>
     )

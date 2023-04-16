@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import {useContext} from 'react';
 import DirectoryContext from '../context/DirectoryContext';
 import { useNavigate } from "react-router-dom";
+import { useEffect } from 'react';
 
 const MAX_WORK_EXPERIENCE = 3;
 const MAX_DESCRIPTION_LENGTH = 150;
@@ -20,6 +21,28 @@ const WorkExperience = () => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [description, setDescription] = useState('');
+
+  useEffect(() => {
+    const Run = async () =>
+    {
+      const Response = await fetch(`http://localhost:3001/workExperience/GetWorkExperience`, {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization-Token': localStorage.getItem('Token')
+        }
+      });
+      const ResponseToJson = await Response.json();
+      if (ResponseToJson.Success === true) {
+        setWorkExperience(ResponseToJson.workExperience)
+      }
+    }
+    Run()
+  })
+
+
+
+
 
   const handleCompanyChange = (e) => {
     setCompany(e.target.value);
@@ -67,16 +90,7 @@ const WorkExperience = () => {
     if (endDateValue === '') {
       endDateValue = "Present";
     }
-  
-    const newWorkExperience = {
-      company: company.trim(),
-      position: position.trim(),
-      startDate: startDate.trim(),
-      endDate: endDateValue,
-      description: description.trim(),
-    };
-  
-    setWorkExperience([...workExperience, newWorkExperience]);
+    
     Context.AddWorkExperience(company, position, startDate, endDate, description);
     setCompany('');
     setPosition('');
@@ -94,6 +108,16 @@ const WorkExperience = () => {
     toast.success("Information Added Successfully!")
     Navigate('/dashboard');
   }
+
+  const handleDelete = async (id) => {
+    Context.DeleteWorkExperience(id);
+  };
+
+  const HandleCancel = () => {
+    Navigate('/dashboard');
+  };
+
+
 
   return (
     <>
@@ -147,12 +171,14 @@ const WorkExperience = () => {
               <h6>Position: {workExp.position}</h6>
               <h6>Description : {workExp.description}</h6>
             </div>
+            <button className="btn btn-danger" onClick={() => handleDelete(workExp._id)}>Delete</button>
           </div>
         ))}
       </div>
 
       <form onSubmit={Submit}>
-        <Button type="submit" padding= "2rem" sx={{backgroundColor:"#69D4C6", color:"white", width:"50%" , marginTop:"1%" ,marginLeft:"-1%"}}> SAVE INFORMATION</Button>
+            <Button type="submit" padding= "2rem" sx={{backgroundColor:"#69D4C6", color:"white", width:"25%" , marginTop:"1%" ,marginLeft:"-1%"}}> SAVE INFORMATION</Button>
+            <Button type="button" padding= "2rem" sx={{backgroundColor:"#69D4C6", color:"white", width:"25%" , marginTop:"1%" ,marginLeft:"1%"}} onClick={HandleCancel}> CANCEL</Button>
     </form>
 
     </>
